@@ -4,7 +4,7 @@
 
 Copying `mp3` files to my USB stick for the car is repetetive. Let's write a script!
 
-Also since my car can't read `m4a` files, let's convert them with a script.
+Also since my car can't read `m4a` files, let's convert them to `mp3`s with a script.
 
 ## Influence
 

@@ -37,9 +37,8 @@ move-m4a-file-to-backup-folder ()
   mv '$fileNameAndPath' '$backupFileNameAndPath'
 }
 
-convert-m4as-to-mp3s ()
+convert-and-move-m4as ()
 {
-  make-backup-dir
   for filename in $(m4a-file-list); do
     local newFileName
     newFileName="$(basename "$filename" .m4a).mp3"
@@ -47,6 +46,12 @@ convert-m4as-to-mp3s ()
     ffmpeg "$newFileName" -i "$filename" -codec:a libmp3lame -qscale:a 1
     move-m4a-file-to-backup-folder "$filename"
   done
+}
+
+convert-m4as-to-mp3s ()
+{
+  make-backup-dir
+  convert-and-move-m4as
 }
 
 convert-m4as-to-mp3s

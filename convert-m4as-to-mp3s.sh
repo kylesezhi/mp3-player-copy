@@ -20,7 +20,7 @@ make-backup-dir ()
 
 m4a-file-list ()
 {
-  echo "$(m4a-files-dir)*.mp3" # TODO mp3 -> m4a
+  echo "$(m4a-files-dir)*.m4a"
 }
 
 move-m4a-file-to-backup-folder ()

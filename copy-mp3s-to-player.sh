@@ -22,6 +22,7 @@ copy-mp3s ()
 
 remove-non-music-files ()
 {
+  echo 'Removing non mp3 files'
   rm "$(mp3-player-dir)/.DS_Store"
 }
 

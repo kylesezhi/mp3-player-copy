@@ -1,9 +1,10 @@
-var itunes = require('itunes-library-stream')
-var userhome = require('userhome')
-var path = require('path')
-var fs = require('fs')
+const itunes = require('itunes-library-stream')
+const userhome = require('userhome')
+const path = require('path')
+const fs = require('fs')
+const execSync = require('child_process').execSync;
  
-var location = path.resolve(userhome()
+const location = path.resolve(userhome()
   , 'Music/iTunes/iTunes Music Library.xml'
 )
 
@@ -18,7 +19,7 @@ const musicPlayerPath = '/Volumes/SPORTPLUS/Music'
 if (!fs.existsSync(musicPlayerPath)) {
   process.exit(-1)
 }
- 
+
 fs.createReadStream(location)
   .pipe(itunes.createTrackStream())
   .on('data', function(track) {
@@ -30,3 +31,13 @@ fs.createReadStream(location)
       fs.copyFileSync(oldLocation, newLocation)
      }
   })
+
+const copyCode = execSync('./copy-mp3s-to-player.sh')
+if (copyCode < 0) {
+  process.exit(-1)
+}
+
+const convertCode = execSync('./convert-m4as-to-mp3s.sh')
+if (convertCode < 0) {
+  process.exit(-1)
+}

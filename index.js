@@ -27,17 +27,19 @@ fs.createReadStream(location)
       const filename = path.basename(location)
       const oldLocation = decodeURI(track.Location.substr(7))
       const newLocation = path.join(musicPlayerPath, filename)
-      console.log('Copying', filename)
-      fs.copyFileSync(oldLocation, newLocation)
+      if (!fs.existsSync(newLocation)) {
+        console.log('Copying', filename)
+        fs.copyFileSync(oldLocation, newLocation)
+      }
      }
   })
 
 const copyCode = execSync('./copy-mp3s-to-player.sh')
 if (copyCode < 0) {
-  process.exit(-1)
+  process.exit(copyCode)
 }
 
 const convertCode = execSync('./convert-m4as-to-mp3s.sh')
 if (convertCode < 0) {
-  process.exit(-1)
+  process.exit(convertCode)
 }

@@ -1,0 +1,23 @@
+{
+  "name": "mp3-player-copy",
+  "version": "1.0.0",
+  "description": "## Motivation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kylesezhi/mp3-player-copy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kylesezhi/mp3-player-copy/issues"
+  },
+  "homepage": "https://github.com/kylesezhi/mp3-player-copy#readme",
+  "dependencies": {
+    "itunes-library-stream": "0.0.0",
+    "userhome": "1.0.0"
+  }
+}

@@ -17,7 +17,7 @@ copy-mp3s ()
 {
   # -v is verbose
   # -a is archive, aka, don't keep partially copied files on error
-  rsync -va $(mps-dir) $(mp3-player-dir)
+  rsync -vau $(mps-dir) $(mp3-player-dir)
 }
 
 remove-non-music-files ()

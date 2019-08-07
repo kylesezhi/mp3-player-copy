@@ -5,17 +5,17 @@ set -o pipefail
 
 m4a-files-dir ()
 {
-  echo '/Volumes/SPORTPLUS/Kids/'
+  echo '/Volumes/SPORTPLUS/Music/'
 }
 
 backup-m4a-files-dir ()
 {
-  echo "$(m4a-files-dir)/m4a-backups"
+  echo "$(m4a-files-dir)m4a-backups"
 }
 
 make-backup-dir ()
 {
-  mkdir "$(backup-m4a-files-dir)"
+  mkdir -p "$(backup-m4a-files-dir)"
 }
 
 m4a-file-list ()
@@ -32,9 +32,9 @@ move-m4a-file-to-backup-folder ()
   local fileName
   fileName=$(basename "$fileNameAndPath")
   local backupFileNameAndPath
-  backupFileNameAndPath="$filePath/m4a-backup/$fileName"
+  backupFileNameAndPath="$(backup-m4a-files-dir)/$fileName"
 
-  mv '$fileNameAndPath' '$backupFileNameAndPath'
+  mv "$fileNameAndPath" "$backupFileNameAndPath"
 }
 
 convert-and-move-m4as ()
@@ -43,7 +43,10 @@ convert-and-move-m4as ()
     local newFileName
     newFileName="$(basename "$filename" .m4a).mp3"
 
-    ffmpeg "$newFileName" -i "$filename" -codec:a libmp3lame -qscale:a 1
+    local newFilePath
+    newFilePath="$(dirname "$filename")/$newFileName"
+
+    ffmpeg "$newFilePath" -i "$filename" -codec:a libmp3lame -qscale:a 1
     move-m4a-file-to-backup-folder "$filename"
   done
 }

@@ -24,8 +24,8 @@ fs.createReadStream(location)
   .pipe(itunes.createTrackStream())
   .on('data', function(track) {
     if (isGoodMusicFile(track)) {
-      const filename = path.basename(location)
       const oldLocation = decodeURI(track.Location.substr(7))
+      const filename = path.basename(oldLocation)
       const newLocation = path.join(musicPlayerPath, filename)
       if (!fs.existsSync(newLocation)) {
         console.log('Copying', filename)
@@ -34,12 +34,14 @@ fs.createReadStream(location)
      }
   })
 
-const copyCode = execSync('./copy-mp3s-to-player.sh')
-if (copyCode < 0) {
-  process.exit(copyCode)
-}
+// const copyCode = execSync('./copy-mp3s-to-player.sh')
+// if (copyCode < 0) {
+//   console.error('./copy-mp3s-to-player.sh')
+//   process.exit(copyCode)
+// }
 
-const convertCode = execSync('./convert-m4as-to-mp3s.sh')
-if (convertCode < 0) {
-  process.exit(convertCode)
-}
+// const convertCode = execSync('./convert-m4as-to-mp3s.sh')
+// if (convertCode < 0) {
+//   console.error('./convert-m4as-to-mp3s.sh')
+//   process.exit(convertCode)
+// }

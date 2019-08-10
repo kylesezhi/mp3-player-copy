@@ -17,18 +17,17 @@ if (!fs.existsSync(musicPlayerPath)) {
   process.exit(-1)
 }
 
-const isGoodPlayCount = (track) => track['Play Count'] > 3
-const isGoodFileType = (track) => !track.Kind.includes('Protected') && !track.Kind.includes('Purchased') && !track.Kind.includes('Internet audio')
-const isGoodGenre = (track) => track.Genre !== 'Hip Hop/Rap'
-const isGoodArtist = (track) => track.Artist !== 'Gavin DeGraw'
-
-const isGoodMusicFile = allPass([isGoodPlayCount, isGoodFileType, isGoodGenre, isGoodArtist])
-
 let size = 0
 const sizeLimitInGb = 14
 const sizeLimitInBytes = sizeLimitInGb * 1000000000
 
+const isGoodPlayCount = (track) => track['Play Count'] > 3
+const isGoodFileType = (track) => !track.Kind.includes('Protected') && !track.Kind.includes('Purchased') && !track.Kind.includes('Internet audio')
+const isGoodGenre = (track) => track.Genre !== 'Hip Hop/Rap'
+const isGoodArtist = (track) => track.Artist !== 'Gavin DeGraw'
 const isGoodSize = (track) => track.Size + size < sizeLimitInBytes
+
+const isGoodMusicFile = allPass([isGoodPlayCount, isGoodFileType, isGoodGenre, isGoodArtist, isGoodSize])
 
 const copyGoodMusicToPlayer = (track) => {
   try {
@@ -37,7 +36,7 @@ const copyGoodMusicToPlayer = (track) => {
     const filename = path.basename(oldLocation)
     const newLocation = path.join(musicPlayerPath, filename)
     const isFileAbsent = !fs.existsSync(newLocation)
-    if (isGoodMusicFile(track) && isFileAbsent && isGoodSize(track)) {
+    if (isGoodMusicFile(track) && isFileAbsent) {
       size = size + track.Size
       console.log('Copying [' + filename + ']')
       console.log('Total size:', size)

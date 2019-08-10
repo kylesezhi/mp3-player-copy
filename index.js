@@ -18,7 +18,7 @@ if (!fs.existsSync(musicPlayerPath)) {
 }
 
 const isGoodPlayCount = (track) => track['Play Count'] > 3
-const isGoodFileType = (track) => !track.Kind.includes('Protected') && !track.Kind.includes('Purchased')
+const isGoodFileType = (track) => !track.Kind.includes('Protected') && !track.Kind.includes('Purchased') && !track.Kind.includes('Internet audio')
 const isGoodGenre = (track) => track.Genre !== 'Hip Hop/Rap'
 const isGoodArtist = (track) => track.Artist !== 'Gavin DeGraw'
 
@@ -39,7 +39,8 @@ const copyGoodMusicToPlayer = (track) => {
     const isFileAbsent = !fs.existsSync(newLocation)
     if (isGoodMusicFile(track) && isFileAbsent && isGoodSize(track)) {
       size = size + track.Size
-      console.log('Copying [' + filename + ']', size)
+      console.log('Copying [' + filename + ']')
+      console.log('Total size:', size)
       if (!DEBUG) {
         fs.copyFileSync(oldLocation, newLocation)
       }

@@ -52,15 +52,23 @@ const copyGoodMusicToPlayer = (track) => {
 fs.createReadStream(location)
   .pipe(itunes.createTrackStream())
   .on('data', copyGoodMusicToPlayer)
+  .on('end', () => runBashScripts)
 
-// const copyCode = execSync('./copy-mp3s-to-player.sh')
-// if (copyCode < 0) {
-//   console.error('./copy-mp3s-to-player.sh')
-//   process.exit(copyCode)
-// }
+const runBashScripts = () => {
+  if (DEBUG) {
+    console.log('Skipping bash scripts')
+    return
+  }
 
-// const convertCode = execSync('./convert-m4as-to-mp3s.sh')
-// if (convertCode < 0) {
-//   console.error('./convert-m4as-to-mp3s.sh')
-//   process.exit(convertCode)
-// }
+  const copyCode = execSync('./copy-mp3s-to-player.sh')
+  if (copyCode < 0) {
+    console.error('./copy-mp3s-to-player.sh')
+    process.exit(copyCode)
+  }
+
+  const convertCode = execSync('./convert-m4as-to-mp3s.sh')
+  if (convertCode < 0) {
+    console.error('./convert-m4as-to-mp3s.sh')
+    process.exit(convertCode)
+  }
+}

@@ -1,0 +1,3 @@
+- 14 GB should be based on player capacity
+- why don't bash scripts run?
+- File '/Volumes/SPORTPLUS/Music/01 Intro.mp3' already exists. Overwrite ? [y/N] N Not overwriting - exiting

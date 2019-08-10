@@ -8,12 +8,12 @@ const allPass = require('ramda/src/allPass')
 const location = path.resolve(userhome()
   , 'Music/iTunes/iTunes Music Library.xml'
 )
+let DEBUG = process.argv.length > 2 ? true : false
 
-// const musicPlayerPath = '/Volumes/SPORTPLUS/Music'
-const musicPlayerPath = '/Users/kyle/tmp'
+const musicPlayerPath = DEBUG ? '/Users/kyle/tmp' : '/Volumes/SPORTPLUS/Music'
 
 if (!fs.existsSync(musicPlayerPath)) {
-  console.error('ERROR The following path does not exist:', musicPlayerPath)
+  console.error('ERROR Path does not exist:', musicPlayerPath)
   process.exit(-1)
 }
 
@@ -40,7 +40,9 @@ const copyGoodMusicToPlayer = (track) => {
     if (isGoodMusicFile(track) && isFileAbsent && isGoodSize(track)) {
       size = size + track.Size
       console.log('Copying [' + filename + ']', size)
-      fs.copyFileSync(oldLocation, newLocation)
+      if (!DEBUG) {
+        fs.copyFileSync(oldLocation, newLocation)
+      }
     }
   } catch (error) {
     console.error('ERROR Could not copy:', error, track)

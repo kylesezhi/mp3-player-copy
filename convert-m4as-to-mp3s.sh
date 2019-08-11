@@ -23,6 +23,13 @@ m4a-file-list ()
   echo "$(m4a-files-dir)*.m4a"
 }
 
+delete-m4a-file ()
+{
+  local fileNameAndPath="${1:?}"
+
+  rm "$fileNameAndPath"
+}
+
 move-m4a-file-to-backup-folder ()
 {
   local fileNameAndPath="${1:?}"
@@ -37,7 +44,7 @@ move-m4a-file-to-backup-folder ()
   mv "$fileNameAndPath" "$backupFileNameAndPath"
 }
 
-convert-and-move-m4as ()
+convert-and-delete-m4as ()
 {
   for filename in $(m4a-file-list); do
     local newFileName
@@ -46,15 +53,15 @@ convert-and-move-m4as ()
     local newFilePath
     newFilePath="$(dirname "$filename")/$newFileName"
 
-    ffmpeg "$newFilePath" -i "$filename" -codec:a libmp3lame -qscale:a 1
-    move-m4a-file-to-backup-folder "$filename"
+    ffmpeg "$newFilePath" -i "$filename" -codec:a libmp3lame -qscale:a 1 -y
+    delete-m -file "$filename"
   done
 }
 
 convert-m4as-to-mp3s ()
 {
-  make-backup-dir
-  convert-and-move-m4as
+  # make-backup-dir
+  convert-and-delete-m4as
 }
 
 convert-m4as-to-mp3s

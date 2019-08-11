@@ -1,3 +1,3 @@
-- 14 GB should be based on player capacity
-- why don't bash scripts run?
-- File '/Volumes/SPORTPLUS/Music/01 Intro.mp3' already exists. Overwrite ? [y/N] N Not overwriting - exiting
+- Auto run on mp3 player plug in https://superuser.com/questions/132084/run-script-when-a-specific-disk-memory-card-is-mounted-under-osx
+- Show output from bash scripts
+- Handle file name collisions

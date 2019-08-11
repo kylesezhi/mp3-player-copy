@@ -2,8 +2,9 @@ const itunes = require('itunes-library-stream')
 const userhome = require('userhome')
 const path = require('path')
 const fs = require('fs')
-const execSync = require('child_process').execSync;
+const execSync = require('child_process').execSync
 const allPass = require('ramda/src/allPass')
+const checkSync = require('diskusage').checkSync
  
 const location = path.resolve(userhome()
   , 'Music/iTunes/iTunes Music Library.xml'
@@ -17,11 +18,19 @@ if (!fs.existsSync(musicPlayerPath)) {
   process.exit(-1)
 }
 
-let size = 0
-const sizeLimitInGb = 14
-const sizeLimitInBytes = sizeLimitInGb * 1000000000
+const bytesToGb = (bytes) => bytes / gbToBytes(1)
+const gbToBytes = (gb) => gb * 1000000000
 
-const bytesToGb = (bytes) => bytes / 1000000000
+let stats
+try {
+  stats = checkSync(musicPlayerPath)
+} catch (error) {
+  console.error('ERROR could not get stats for:', musicPlayerPath)
+  process.exit(-1)
+}
+
+let size = 0
+const sizeLimitInBytes = stats.free - gbToBytes(1)
 
 const isGoodPlayCount = (track) => track['Play Count'] > 3
 const isGoodFileType = (track) => !track.Kind.includes('Protected') && !track.Kind.includes('Purchased') && !track.Kind.includes('Internet audio')
@@ -41,7 +50,7 @@ const copyGoodMusicToPlayer = (track) => {
     if (isGoodMusicFile(track) && isFileAbsent) {
       size = size + track.Size
       console.log('Copying [' + filename + ']')
-      console.log('Total size:', bytesToGb(size), 'GB\n')
+      console.log('Total size:', bytesToGb(size), 'GB of', bytesToGb(sizeLimitInBytes), 'GB\n')
       if (!DEBUG) {
         fs.copyFileSync(oldLocation, newLocation)
       }

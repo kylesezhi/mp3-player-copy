@@ -5,7 +5,7 @@ set -o pipefail
 
 mps-dir ()
 {
-  echo /Users/kyle/Downloads/mps/
+  echo 'kyle@bedell-ramirez-ubuntu.local:/home/kyle/Downloads/mps'
 }
 
 mp3-player-dir ()

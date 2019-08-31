@@ -37,8 +37,9 @@ const isGoodFileType = (track) => !track.Kind.includes('Protected') && !track.Ki
 const isGoodGenre = (track) => track.Genre !== 'Hip Hop/Rap' && track.Genre !== 'Interlude' && track.Genre !== 'Teaching'
 const isGoodArtist = (track) => track.Artist !== 'Gavin DeGraw'
 const isGoodSize = (track) => track.Size + size < sizeLimitInBytes
+const isGoodDateModified = (track) => track['Date Modified'].getFullYear() > 2013
 
-const isGoodMusicFile = allPass([isGoodPlayCount, isGoodFileType, isGoodGenre, isGoodArtist, isGoodSize])
+const isGoodMusicFile = allPass([isGoodPlayCount, isGoodFileType, isGoodGenre, isGoodArtist, isGoodSize, isGoodDateModified])
 
 const copyGoodMusicToPlayer = (track) => {
   try {
@@ -47,9 +48,12 @@ const copyGoodMusicToPlayer = (track) => {
     const filename = path.basename(oldLocation)
     const newLocation = path.join(musicPlayerPath, filename)
     const isFileAbsent = !fs.existsSync(newLocation)
+    const modified = track['Date Modified']
     if (isGoodMusicFile(track) && isFileAbsent) {
       size = size + track.Size
+      debugger
       console.log('Copying [' + filename + ']')
+      console.log('Modified:', modified, modified.getFullYear())
       console.log('Total size:', bytesToGb(size), 'GB of', bytesToGb(sizeLimitInBytes), 'GB\n')
       if (!DEBUG) {
         fs.copyFileSync(oldLocation, newLocation)

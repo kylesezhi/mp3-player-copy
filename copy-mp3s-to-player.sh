@@ -5,7 +5,7 @@ set -o pipefail
 
 mps-dir ()
 {
-  echo 'kyle@bedell-ramirez-ubuntu.local:/home/kyle/Downloads/mps'
+  echo 'kyle@bedell-ramirez-ubuntu.local:/home/kyle/Downloads/mps/'
 }
 
 mp3-player-dir ()
@@ -17,19 +17,14 @@ copy-mp3s ()
 {
   # -v is verbose
   # -a is archive, aka, don't keep partially copied files on error
-  rsync -vau $(mps-dir) $(mp3-player-dir)
-}
-
-remove-non-music-files ()
-{
-  echo 'Removing non mp3 files'
-  rm "$(mp3-player-dir)/.DS_Store"
+  # -u is update, aka, copy source files that are new
+  # --delete is delete remote files that aren't in source
+  rsync -vau $(mps-dir) $(mp3-player-dir) --delete
 }
 
 copy-mp3s-to-player ()
 {
   copy-mp3s
-  remove-non-music-files
 }
 
 copy-mp3s-to-player

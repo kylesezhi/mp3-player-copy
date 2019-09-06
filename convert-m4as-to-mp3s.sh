@@ -5,7 +5,7 @@ set -o pipefail
 
 m4a-files-dir ()
 {
-  echo '/Volumes/SPORTPLUS/Music/'
+  echo '/Volumes/SPORTPLUS/Kids/'
 }
 
 backup-m4a-files-dir ()

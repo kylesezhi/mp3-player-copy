@@ -22,9 +22,16 @@ copy-mp3s ()
   rsync -vau $(mps-dir) $(mp3-player-dir) --delete
 }
 
+remove-non-music-files ()
+{
+  echo 'Removing non mp3 files'
+  rm "$(mp3-player-dir)/README.md"
+}
+
 copy-mp3s-to-player ()
 {
   copy-mp3s
 }
 
 copy-mp3s-to-player
+remove-non-music-files

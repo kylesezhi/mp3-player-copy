@@ -10,7 +10,7 @@ mps-dir ()
 
 mp3-player-dir ()
 {
-  echo '/Volumes/SPORTPLUS/Music'
+  echo '/media/kyle/SPORTPLUS/Music'
 }
 
 copy-mp3s ()

@@ -19,7 +19,7 @@ copy-mp3s ()
   # -a is archive, aka, don't keep partially copied files on error
   # -u is update, aka, copy source files that are new
   # --delete is delete remote files that aren't in source
-  rsync -vau $(mps-dir) $(mp3-player-dir) --delete
+  rsync -vau $(mps-dir) $(mp3-player-dir) --delete --temp-dir=/tmp
 }
 
 remove-non-music-files ()

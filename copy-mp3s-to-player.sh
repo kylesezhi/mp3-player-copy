@@ -5,7 +5,7 @@ set -o pipefail
 
 mps-dir ()
 {
-  echo 'kyle@10.0.1.13:/home/kyle/Downloads/mps/'
+  echo '/home/kyle/Downloads/mps/'
 }
 
 mp3-player-dir ()

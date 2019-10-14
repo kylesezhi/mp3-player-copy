@@ -28,10 +28,17 @@ remove-non-music-files ()
   rm "$(mp3-player-dir)/README.md"
 }
 
+rename-files-with-illegal-characters ()
+{
+  #find . -name "*.js" | xargs rename -v -i 's/|//' 
+  find . -name "*.js"
+}
+
 copy-mp3s-to-player ()
 {
   copy-mp3s
 }
 
+#rename-files-with-illegal-characters
 copy-mp3s-to-player
 remove-non-music-files

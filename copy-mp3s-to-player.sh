@@ -10,7 +10,21 @@ mps-dir ()
 
 mp3-player-dir ()
 {
+  echo '/media/kyle/SPORTPLUS'
+}
+
+mp3-player-music-dir ()
+{
   echo '/media/kyle/SPORTPLUS/Music'
+}
+
+mount-usb-if-necessary ()
+{
+  if [ ! -d $(mp3-player-dir) ]
+  then
+    sudo mkdir -p $(mp3-player-dir)
+    sudo mount -t vfat /dev/sdb1 $(mp3-player-dir) -o uid=1000,gid=1000,utf8,dmask=027,fmask=137
+  fi
 }
 
 copy-mp3s ()
@@ -19,13 +33,13 @@ copy-mp3s ()
   # -a is archive, aka, don't keep partially copied files on error
   # -u is update, aka, copy source files that are new
   # --delete is delete remote files that aren't in source
-  rsync -vau $(mps-dir) $(mp3-player-dir) --delete --temp-dir=/tmp --stats --progress
+  rsync -vau $(mps-dir) $(mp3-player-music-dir) --delete --temp-dir=/tmp --stats --progress
 }
 
 remove-non-music-files ()
 {
   echo 'Removing non mp3 files'
-  rm "$(mp3-player-dir)/README.md"
+  rm "$(mp3-player-music-dir)/README.md"
 }
 
 rename-files-with-illegal-characters ()
@@ -40,5 +54,6 @@ copy-mp3s-to-player ()
 }
 
 #rename-files-with-illegal-characters
+mount-usb-if-necessary
 copy-mp3s-to-player
 remove-non-music-files

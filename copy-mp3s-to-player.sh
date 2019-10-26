@@ -18,16 +18,46 @@ mp3-player-music-dir ()
   echo '/media/kyle/SPORTPLUS/Music'
 }
 
+remove-this-character ()
+{
+  local character="${1:?}"
+
+  find $(mps-dir) -iname "*.mp3" | while read file
+  do
+    local destination
+    destination=$(echo "$file" | sed "s/$character//g")
+    if [ "$file" != "${destination}"  ]
+    then
+      echo "[renaming :] $file"
+      mv "$file" "${destination}"
+    fi
+  done
+}
+
+rename-files-with-illegal-characters ()
+{
+  echo 'Renaming files with illegal characters'
+  remove-this-character '|'
+  remove-this-character ':'
+}
+
 mount-usb-if-necessary ()
 {
-  if [ ! -d $(mp3-player-dir) ]
-  then
+  if [ ! -d $(mp3-player-dir) ] # if the player directory does not exist
+ then
+    echo 'Mounting USB drive'
     sudo mkdir -p $(mp3-player-dir)
     sudo mount -t vfat /dev/sdb1 $(mp3-player-dir) -o uid=1000,gid=1000,utf8,dmask=027,fmask=137
   fi
 }
 
-copy-mp3s ()
+unmount-usb ()
+{
+  echo 'Unmounting USB drive'
+  sudo umount $(mp3-player-dir)
+}
+
+copy-mp3s-to-player ()
 {
   # -v is verbose
   # -a is archive, aka, don't keep partially copied files on error
@@ -42,18 +72,8 @@ remove-non-music-files ()
   rm "$(mp3-player-music-dir)/README.md"
 }
 
-rename-files-with-illegal-characters ()
-{
-  #find . -name "*.js" | xargs rename -v -i 's/|//' 
-  find . -name "*.js"
-}
-
-copy-mp3s-to-player ()
-{
-  copy-mp3s
-}
-
-#rename-files-with-illegal-characters
+rename-files-with-illegal-characters
 mount-usb-if-necessary
 copy-mp3s-to-player
 remove-non-music-files
+unmount-usb

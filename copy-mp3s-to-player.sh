@@ -46,6 +46,7 @@ rename-files-with-illegal-characters ()
   remove-this-character ':'
 }
 
+# https://help.ubuntu.com/community/Mount/USB
 mount-usb-if-necessary ()
 {
   # find mounted with: sudo fdisk -l

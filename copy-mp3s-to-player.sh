@@ -3,6 +3,11 @@ set -e
 set -u
 set -o pipefail
 
+mount-dir ()
+{
+  echo $(mount | tail -1 | cut -d ' ' -f 1)
+}
+
 mps-dir ()
 {
   echo '/home/kyle/Downloads/mps/'
@@ -48,7 +53,7 @@ mount-usb-if-necessary ()
   then
     echo 'Mounting USB drive'
     sudo mkdir -p $(mp3-player-dir)
-    sudo mount -t vfat /dev/sdc1 $(mp3-player-dir) -o uid=1000,gid=1000,utf8,dmask=027,fmask=137
+    sudo mount -t vfat $(mount-dir) $(mp3-player-dir) -o uid=1000,gid=1000,utf8,dmask=027,fmask=137
   fi
 }
 

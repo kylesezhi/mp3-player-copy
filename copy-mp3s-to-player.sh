@@ -43,11 +43,12 @@ rename-files-with-illegal-characters ()
 
 mount-usb-if-necessary ()
 {
-  if [ ! -d $(mp3-player-dir) ] # if the player directory does not exist
- then
+  # find mounted with: sudo fdisk -l
+  if [ ! -d $(mp3-player-music-dir) ] # if the player directory does not exist
+  then
     echo 'Mounting USB drive'
     sudo mkdir -p $(mp3-player-dir)
-    sudo mount -t vfat /dev/sdb1 $(mp3-player-dir) -o uid=1000,gid=1000,utf8,dmask=027,fmask=137
+    sudo mount -t vfat /dev/sdc1 $(mp3-player-dir) -o uid=1000,gid=1000,utf8,dmask=027,fmask=137
   fi
 }
 
@@ -72,8 +73,8 @@ remove-non-music-files ()
   rm "$(mp3-player-music-dir)/README.md"
 }
 
-rename-files-with-illegal-characters
 mount-usb-if-necessary
+rename-files-with-illegal-characters
 copy-mp3s-to-player
 remove-non-music-files
 unmount-usb

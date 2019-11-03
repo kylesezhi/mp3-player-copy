@@ -33,7 +33,7 @@ remove-this-character ()
     destination=$(echo "$file" | sed "s/$character//g")
     if [ "$file" != "${destination}"  ]
     then
-      echo "[renaming :] $file"
+      echo "[removing $character] $file"
       mv "$file" "${destination}"
     fi
   done

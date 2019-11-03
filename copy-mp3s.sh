@@ -44,6 +44,8 @@ rename-files-with-illegal-characters ()
   echo 'Renaming files with illegal characters'
   remove-this-character '|'
   remove-this-character ':'
+  remove-this-character '+'
+  remove-this-character '/'
 }
 
 # https://help.ubuntu.com/community/Mount/USB

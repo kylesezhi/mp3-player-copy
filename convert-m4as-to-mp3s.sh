@@ -5,7 +5,7 @@ set -o pipefail
 
 m4a-files-dir ()
 {
-  echo '/Volumes/SPORTPLUS/Kids/'
+  echo '/home/kyle/Downloads/mps/'
 }
 
 backup-m4a-files-dir ()
@@ -20,7 +20,8 @@ make-backup-dir ()
 
 m4a-file-list ()
 {
-  echo "$(m4a-files-dir)*.m4a"
+  echo $(find $(m4a-files-dir) -name *.m4a)
+  #echo "$(m4a-files-dir)*.m4a"
 }
 
 delete-m4a-file ()
@@ -60,8 +61,9 @@ convert-and-delete-m4as ()
 
 convert-m4as-to-mp3s ()
 {
-  # make-backup-dir
-  convert-and-delete-m4as
+  #make-backup-dir
+  #convert-and-delete-m4as
+  m4a-file-list
 }
 
 convert-m4as-to-mp3s

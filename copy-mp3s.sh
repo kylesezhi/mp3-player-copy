@@ -15,12 +15,12 @@ mps-dir ()
 
 mp3-player-dir ()
 {
-  echo '/media/kyle/SPORTPLUS'
+  echo '/media/kyle/BLADE'
 }
 
 mp3-player-music-dir ()
 {
-  echo '/media/kyle/SPORTPLUS/Music'
+  echo '/media/kyle/BLADE/Music'
 }
 
 remove-this-character ()
@@ -30,7 +30,7 @@ remove-this-character ()
   find $(mps-dir) -iname "*.mp3" | while read file
   do
     local destination
-    destination=$(echo "$file" | sed "s/$character//g")
+    destination=$(echo "$file" | sed "s/\$character//g")
     if [ "$file" != "${destination}"  ]
     then
       echo "[removing $character] $file"

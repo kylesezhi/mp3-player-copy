@@ -1,3 +1,4 @@
 - Auto run on mp3 player plug in https://superuser.com/questions/132084/run-script-when-a-specific-disk-memory-card-is-mounted-under-osx
 - Show output from bash scripts
 - Handle file name collisions
+- Make mount point configurable

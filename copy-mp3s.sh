@@ -70,9 +70,10 @@ copy-mp3s-to-player ()
 {
   # -v is verbose
   # -a is archive, aka, don't keep partially copied files on error
+  # BUT -rltgoDv is equivalent to -a, but doesn't try to set file ownership on the target
   # -u is update, aka, copy source files that are new
   # --delete is delete remote files that aren't in source
-  rsync -vau $(mps-dir) $(mp3-player-music-dir) --delete --temp-dir=/tmp --stats --progress
+  rsync -rltgoDvu $(mps-dir) $(mp3-player-music-dir) --delete --temp-dir=/tmp --stats --progress
 }
 
 remove-non-music-files ()

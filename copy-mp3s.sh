@@ -27,6 +27,7 @@ remove-this-character ()
 {
   local character="${1:?}"
 
+  echo "Removing character: ${character}"
   find $(mps-dir) -iname "*.mp3" | while read file
   do
     local destination
@@ -76,14 +77,13 @@ copy-mp3s-to-player ()
   rsync -rltgoDvu $(mps-dir) $(mp3-player-music-dir) --delete --temp-dir=/tmp --stats --progress 2>/dev/null
 }
 
-remove-non-music-files ()
+reminders ()
 {
-  echo 'Removing non mp3 files'
-  rm "$(mp3-player-music-dir)/README.md"
+  echo 'Remember to run me with sudo!'
 }
 
+reminders
 mount-usb-if-necessary
 rename-files-with-illegal-characters
 copy-mp3s-to-player
-remove-non-music-files
 unmount-usb

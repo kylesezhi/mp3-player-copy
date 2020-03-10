@@ -23,6 +23,12 @@ sudo -H pip3 install --upgrade youtube-dl
 
 If installed with apt install mps-youtube, pip3 upgrade doesn't seem to work. So don't do that! :)
 
+## Data API error
+Make new API key, do:
+rm ~/.config/mps-youtube/cache_py*
+mpsyt set api_key [new key]
+
+
 # Backup
 
 ## Mount / unmount

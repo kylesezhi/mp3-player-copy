@@ -20,8 +20,9 @@ The Sandisk is vfat, which I think means that these characters in filenames caus
 ## Upgrade
 sudo -H pip3 install --upgrade youtube-dl pafy
 sudo -H pip3 install --upgrade youtube-dl
+sudo -H pip3 install --upgrade mps-youtube
 
-If installed with apt install mps-youtube, pip3 upgrade doesn't seem to work. So don't do that! :)
+If installed with `apt install mps-youtube`, pip3 upgrade doesn't seem to work. So don't do that! :)
 
 ## Data API error
 Make new API key, do:

@@ -28,14 +28,3 @@ If installed with `apt install mps-youtube`, pip3 upgrade doesn't seem to work. 
 Make new API key, do:
 rm ~/.config/mps-youtube/cache_py*
 mpsyt set api_key [new key]
-
-
-# Backup
-
-## Mount / unmount
-sudo s3fs bedell-ramirez.music /var/music-backup -o allow_other -o use_path_request_style -o passwd_file=/home/kyle/.passwd-s3fs -o use_cache=/tmp
-~/Documents/backup-mp3.sh
-sudo umount /var/music-backup
-
-## Backup script
-

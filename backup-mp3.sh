@@ -3,4 +3,6 @@ set -e
 set -u
 set -o pipefail
 
-restic -r ~/Dropbox/Music/ backup ~/Downloads/mps/ --password-file .restic
+BASE=/home/kyle
+
+restic -r $BASE/Dropbox/Music/ backup $BASE/Downloads/mps/ --password-file $BASE/Documents/mp3-player-copy/.restic

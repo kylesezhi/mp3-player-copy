@@ -1,0 +1,7 @@
+[Unit]
+Description="A script to backup all music"
+
+[Service]
+ExecStart=/home/kyle/Documents/mp3-player-copy/backup-mp3.sh
+# $HOME or $XDG_CACHE_HOME must be set for restic to find /root/.cache/restic/
+Environment="HOME=/home/kyle"

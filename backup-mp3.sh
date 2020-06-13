@@ -2,9 +2,6 @@
 set -e
 set -u
 set -o pipefail
-# Reference:
-# https://www.putorius.net/using-systemd-timers.html
-# https://github.com/erikw/restic-systemd-automatic-backup
 
 BASE=/home/kyle
 

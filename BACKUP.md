@@ -3,8 +3,9 @@
 ## Backup script
 ~/Documents/mp3-player-copy/backup-mp3.sh
 
-## Mount
-sudo s3fs bedell-ramirez.music /var/music-backup -o allow_other -o use_path_request_style -o passwd_file=/home/kyle/.passwd-s3fs -o use_cache=/tmp
+## Check if it's run
+sudo journalctl -u music-backup
+https://www.putorius.net/using-systemd-timers.html
 
-## Unmount
-sudo umount /var/music-backup
+## Reference
+https://github.com/erikw/restic-systemd-automatic-backup

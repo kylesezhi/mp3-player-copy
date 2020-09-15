@@ -1,6 +1,5 @@
 echo ':: Removing existing playlists'
-cd /home/kyle/Downloads/mps/Playlists
-rm -rf .
+rm -rf ~/Downloads/mps/Playlists/*
 
 echo ':: Generating new playlists'
 cd /home/kyle/Downloads/mps

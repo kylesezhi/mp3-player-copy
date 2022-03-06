@@ -11,6 +11,9 @@ ffmpeg -i IN -codec:a libmp3lame -b:a 256k OUT.EXT
 for f in *.webm; do ffmpeg -i "$f" -codec:a libmp3lame -b:a 256k "${f%.webm}.mp3"; done
 
 ## Youtube to MP3 (NO metadata!)
+youtube-dl -x --audio-format mp3 --prefer-ffmpeg --audio-quality 256K --add-metadata <video URL>
+
+Or, if you need to specify the location of ffmpeg:
 youtube-dl --extract-audio --audio-format mp3 --audio-quality 256K --prefer-ffmpeg --ffmpeg-location /usr/bin/ffmpeg <video URL>
 
 ## Illegal characters
